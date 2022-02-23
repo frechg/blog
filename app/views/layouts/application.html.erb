@@ -11,6 +11,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header id="header">
+      <nav>
+        <%= link_to "Articles", root_path %>
+        <%= link_to "New Post",new_article_path %>
+      </nav>
+    </header>
+    <section class="primary-content">
+      <%= yield %>
+    </section>
   </body>
 </html>

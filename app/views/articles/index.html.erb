@@ -1,15 +1,17 @@
-<h1>Articles</h1>
-
-<p><%= Article.public_count %> articles and <%= Comment.public_count %> comments.</p>
-<%= link_to "New Article", new_article_path %>
-<ul>
+<header class="content-header">
+  <h1>Articles</h1>
+  <p>
+  <%= Article.public_count %> <%= 'article'.pluralize(Article.public_count) %> and <%= Comment.public_count %> <%= 'comment'.pluralize(Comment.public_count) %>
+  </p>
+</header>
+<section class="article-list">
   <% @articles.each do |article| %>
     <% unless article.archived? %>
-      <li>
+      <article class="preview">
         <a href="<%= article_path(article) %>">
           <h3><%= article.title %></h3>
         </a>
-      </li>
+      </article>
     <% end %>
   <% end %>
-</ul>
+</section>
