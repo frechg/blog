@@ -1,0 +1,112 @@
+$form-border-color: $base-border-color;
+$form-border-color-hover: shade-color($base-border-color, 10%);
+$form-border-color-focus: $base-accent-color;
+$form-border-radius: $base-border-radius;
+$form-box-shadow: inset 0 1px 3px hsla(0, 0%, 0%, 0.06);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px
+rgba(shade-color($form-border-color-focus, 10%), 0.7);
+$form-font-size: $base-font-size;
+$form-font-family: $font-stack-sans-serif;
+
+fieldset {
+  background: color-tint($base-border-color, 10%);
+  border: 1px solid $base-border-color;
+  margin: 0 0 div($base-line-height, 2) 0;
+  padding: $base-line-height;
+}
+
+input,
+label,
+select {
+  display: block;
+  font-family: $form-font-family;
+  font-size: $form-font-size;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: div($base-line-height, 4);
+
+  &.required:after {
+    content: "*";
+  }
+
+  abbr {
+    display: none;
+  }
+}
+
+.input-group {
+  margin: 0.5rem 0;
+  position: relative;
+}
+
+.input-group-radio {
+  margin: 1rem 0rem;
+
+  input[type="radio"] {
+    position: absolute;
+    top: 1.25rem;
+    left: 1rem;
+  }
+
+  input[type="radio"] + label {
+    display: block;
+    background: $gray-100;
+    border-radius: $base-border-radius;
+    border: 1px solid $gray-200;
+    padding: 1rem 1rem 1rem 2.25rem;
+
+    &:hover {
+      cursor: pointer;
+      border-color: tint-color($base-accent-color, 60%);
+    }
+  }
+
+  input[type="radio"]:checked + label {
+    border-color: $base-accent-color;
+  }
+}
+
+#{$all-text-inputs} {
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: $form-border-radius;
+  border: 1px solid $form-border-color;
+  box-shadow: $form-box-shadow;
+  font-family: $form-font-family;
+  font-size: $form-font-size;
+  margin-bottom: div($base-line-height, 2);
+  padding: div($base-line-height, 2) div($base-line-height, 2);
+  resize: vertical;
+  width: 100%;
+
+  &:hover {
+    border-color: $form-border-color-hover;
+  }
+
+  &:focus {
+    border-color: $form-border-color-focus;
+    box-shadow: $form-box-shadow-focus;
+    outline: none;
+  }
+}
+
+input[type="checkbox"], input[type="radio"] {
+  display: inline;
+  margin-right: div($base-line-height, 4);
+}
+
+input[type="file"] {
+  width: 100%;
+}
+
+select {
+  width: auto;
+  margin-bottom: $base-line-height;
+}
+
+input[type="submit"] {
+  margin-top: 1rem;
+}
+

@@ -1,0 +1,39 @@
+.btn,
+input[type="submit"],
+button {
+  display: inline-block;
+  font-family: $font-stack-sans-serif;
+  font-size: $base-font-size;
+  font-weight: medium;
+  line-height: $base-line-height;
+  color: $white;
+  text-align: center;
+  text-decoration: none;
+  white-space: null;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: $blue;
+  border: none;
+  border-radius: $base-border-radius;
+  padding: 0.75rem 1.5rem;
+
+  &:hover {
+    background-color: tint-color($blue, 20%);
+    text-decoration: none;
+  }
+
+  &:active {
+    background-color: shade-color($blue, 10%);
+
+    &:focus {
+    }
+  }
+
+  &:disabled,
+  &.disabled,
+  fieldset:disabled & {
+    pointer-events: none;
+    opacity: 0.65;
+  }
+}
