@@ -1,7 +1,0 @@
-<% unless comment.archived? %>
-  <div>
-    <strong><%= comment.commenter %></strong>
-    <p><%= comment.body %></p>
-    <%= link_to "Delete", [comment.article, comment], data: { turbo_method: :delete, tubro_confirm: "Are you sure?" } %>
-  </div>
-<% end %>

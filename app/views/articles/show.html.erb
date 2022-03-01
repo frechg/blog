@@ -5,17 +5,3 @@
 
   <p><%= @article.body %></p>
 </article>
-
-<section class="comments">
-  <div class="comment-list">
-    <h2>Comments</h2>
-    <div>
-      <%= render @article.comments  %>
-    </div>
-  </div>
-
-  <div class="add-comment">
-    <h2>Add a comment</h2>
-    <%= render 'comments/form' %>
-  </div>
-</section>
