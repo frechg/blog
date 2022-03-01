@@ -1,9 +1,9 @@
-@import 'normalize';
-@import 'functions';
-@import 'variables';
-@import 'buttons';
-@import 'forms';
-@import 'base';
+@import 'base/normalize';
+@import 'base/functions';
+@import 'base/variables';
+@import 'base/buttons';
+@import 'base/forms';
+@import 'base/base';
 
 header#header {
   border-bottom: 1px solid #e1e1e1;
@@ -53,4 +53,14 @@ section.container {
   padding: 30px;
 }
 
+article.post-body {
+  border-bottom: 1px solid #999;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+}
 
+section.comments {
+  div.comment-list {}
+
+  div.add-comment {}
+}
