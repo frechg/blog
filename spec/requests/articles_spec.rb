@@ -58,14 +58,14 @@ RSpec.describe "Articles", type: :request do
     end
 
     scenario "the author makes an invalid update" do
-      article = create(:article)
+      article = create(:article, title: "Original title")
 
       patch "/articles/#{article.id}", params: {
         article: { title: "" }
       }
 
       expect(response).to have_http_status(422)
-      expect(article.reload.title).to eq(article.title)
+      expect(article.reload.title).to eq("Original title")
     end
   end
 
@@ -77,19 +77,6 @@ RSpec.describe "Articles", type: :request do
 
       expect(response).to have_http_status(303)
       expect(Article.count).to eq(0)
-    end
-  end
-
-  describe "PATCH /article/:id" do
-    it "updates the article and redirects to it" do
-      article = create(:article)
-
-      patch "/articles/#{article.id}", params: {
-        article: { title: "Updated title" }
-      }
-
-      expect(response).to have_http_status(302)
-      expect(article.reload.title).to eq("Updated title")
     end
   end
 end
