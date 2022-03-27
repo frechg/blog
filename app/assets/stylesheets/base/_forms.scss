@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 $form-border-color: $base-border-color;
 $form-border-color-hover: shade-color($base-border-color, 10%);
 $form-border-color-focus: $base-accent-color;
@@ -11,7 +13,7 @@ $form-font-family: $font-stack-sans-serif;
 fieldset {
   background: color-tint($base-border-color, 10%);
   border: 1px solid $base-border-color;
-  margin: 0 0 div($base-line-height, 2) 0;
+  margin: 0 0 math.div($base-line-height, 2) 0;
   padding: $base-line-height;
 }
 
@@ -25,7 +27,7 @@ select {
 
 label {
   font-weight: bold;
-  margin-bottom: div($base-line-height, 4);
+  margin-bottom: math.div($base-line-height, 4);
 
   &.required:after {
     content: "*";
@@ -36,7 +38,7 @@ label {
   }
 }
 
-.input-group {
+.field {
   margin: 0.5rem 0;
   position: relative;
 }
@@ -76,8 +78,8 @@ label {
   box-shadow: $form-box-shadow;
   font-family: $form-font-family;
   font-size: $form-font-size;
-  margin-bottom: div($base-line-height, 2);
-  padding: div($base-line-height, 2) div($base-line-height, 2);
+  margin-bottom: math.div($base-line-height, 2);
+  padding: math.div($base-line-height, 2) math.div($base-line-height, 2);
   resize: vertical;
   width: 100%;
 
@@ -94,7 +96,7 @@ label {
 
 input[type="checkbox"], input[type="radio"] {
   display: inline;
-  margin-right: div($base-line-height, 4);
+  margin-right: math.div($base-line-height, 4);
 }
 
 input[type="file"] {

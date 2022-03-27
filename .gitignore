@@ -248,3 +248,6 @@ tags
 # Support for Project snippet scope
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,ruby,rails,vim,visualstudiocode,react
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

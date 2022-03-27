@@ -55,3 +55,19 @@ section.container {
 
 article.post-body {
 }
+
+.flash-message {
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 24px;
+}
+
+.notice {
+  border: 1px solid yellow;
+  color: brown;
+}
+
+.alert {
+  border: 1px solid red;
+  color: red;
+}

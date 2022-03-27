@@ -18,6 +18,13 @@
       </nav>
     </header>
     <section class="primary-content">
+      <div>
+        <% if notice %>
+          <p class="flash-message notice"><%= notice %></p>
+        <% elsif alert %>
+          <p class="flash-message alert"><%= alert %></p>
+        <% end %>
+      </div>
       <%= yield %>
     </section>
   </body>
