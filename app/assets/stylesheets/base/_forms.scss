@@ -43,16 +43,14 @@ label {
   position: relative;
 }
 
-.input-group-radio {
-  margin: 1rem 0rem;
-
-  input[type="radio"] {
+.check-box-field {
+  input[type="checkbox"] {
     position: absolute;
     top: 1.25rem;
     left: 1rem;
   }
 
-  input[type="radio"] + label {
+  input[type="checkbox"] + label {
     display: block;
     background: $gray-100;
     border-radius: $base-border-radius;
@@ -65,7 +63,7 @@ label {
     }
   }
 
-  input[type="radio"]:checked + label {
+  input[type="checkbox"]:checked + label {
     border-color: $base-accent-color;
   }
 }
