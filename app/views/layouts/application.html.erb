@@ -19,6 +19,7 @@
         </div>
         <div class="nav-right">
           <% if signed_in? %>
+            <p class="user-name"><%= current_user.user_name %></p>
             <%= button_to "Logout", sign_out_path, method: :delete  %>
           <% else %>
             <%= link_to "Sign In", sign_in_path %>

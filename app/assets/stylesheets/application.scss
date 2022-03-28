@@ -25,7 +25,12 @@ header#header {
 
     .nav-right {
       display: flex;
+      align-items: center;
     }
+  }
+
+  .user-name {
+    margin: 0 1rem;
   }
 }
 

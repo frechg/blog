@@ -1,0 +1,16 @@
+<div id="clearance" class="sign-up">
+  <h2><%= t(".title") %></h2>
+
+  <%= form_for @user, html: { data: {turbo: false} }  do |form| %>
+    <%= render partial: '/users/form', locals: { form: form, user: @user } %>
+
+    <div class="submit-field">
+      <%= form.submit %>
+    </div>
+
+    </br>
+    <div class="other-links">
+      <%= link_to t(".sign_in"), sign_in_path %>
+    </div>
+  <% end %>
+</div>
