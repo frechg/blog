@@ -11,10 +11,20 @@ header#header {
   nav {
     display: flex;
     margin: 0px 20px;
+    align-items: center;
+    justify-content: space-between;
 
     a {
       margin: 0px 10px;
       padding: 30px 0px;
+    }
+
+    .nav-left {
+      display: flex;
+    }
+
+    .nav-right {
+      display: flex;
     }
   }
 }
@@ -60,14 +70,14 @@ article.post-body {
   border-radius: 6px;
   padding: 12px;
   margin-bottom: 24px;
-}
 
-.notice {
-  border: 1px solid yellow;
-  color: brown;
-}
+  &.notice {
+    border: 1px solid yellow;
+    color: brown;
+  }
 
-.alert {
-  border: 1px solid red;
-  color: red;
+  &.alert {
+    border: 1px solid red;
+    color: red;
+  }
 }

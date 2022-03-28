@@ -13,22 +13,24 @@
   <body>
     <header id="header">
       <nav>
-        <%= link_to "Articles", root_path %>
-        <%= link_to "New Post", new_article_path %>
-        <% if user_signed_in? %>
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, data: {turbo: false}  %>
-        <% else %>
-          <%= link_to "Sign In", new_user_session_path %>
-          <%= link_to "Sign Up", new_user_registration_path %>
-        <% end %>
+        <div class="nav-left">
+          <%= link_to "Articles", root_path %>
+          <%= link_to "New Post", new_article_path %>
+        </div>
+        <div class="nav-right">
+          <% if signed_in? %>
+            <%= button_to "Logout", sign_out_path, method: :delete  %>
+          <% else %>
+            <%= link_to "Sign In", sign_in_path %>
+            <%= link_to "Sign Up", sign_up_path %>
+          <% end %>
+        </div>
       </nav>
     </header>
     <section class="primary-content">
-      <div>
-        <% if notice %>
-          <p class="flash-message notice"><%= notice %></p>
-        <% elsif alert %>
-          <p class="flash-message alert"><%= alert %></p>
+      <div id="flash">
+        <% flash.each do |key, value| %>
+          <div class="flash-message <%= key %>"><%= value %></div>
         <% end %>
       </div>
       <%= yield %>
