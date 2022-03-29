@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.last(5)
+    @articles = current_user.articles.order(created_at: :desc).first(5)
   end
 
   def show
