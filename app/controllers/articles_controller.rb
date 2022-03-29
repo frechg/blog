@@ -24,6 +24,8 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    @article_frames = @article.frames
+    @new_frame = Frame.new
   end
 
   def update

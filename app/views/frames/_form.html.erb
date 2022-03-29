@@ -1,0 +1,17 @@
+<%= form_with(model: [@article, frame]) do |form| %>
+  <div>
+    <%= form.label :display_type %>
+    <%= form.select :display_type, ['image'], selected: 'image' %>
+  </div>
+  <div>
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+  <div>
+    <%= form.label :caption %>
+    <%= form.text_area :caption %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

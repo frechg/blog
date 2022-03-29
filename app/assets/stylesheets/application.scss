@@ -68,9 +68,6 @@ section.container {
   padding: 30px;
 }
 
-article.post-body {
-}
-
 .flash-message {
   border-radius: 6px;
   padding: 12px;
@@ -84,5 +81,45 @@ article.post-body {
   &.alert {
     border: 1px solid red;
     color: red;
+  }
+}
+
+
+article.post-body {
+}
+
+.article-header {
+  margin-bottom: 4rem;
+}
+
+.article-summary {
+  margin-bottom: 4rem;
+}
+
+.article-content {
+  margin-bottom: 4rem;
+}
+
+.frame {
+  margin: 0 0 2rem 0;
+
+  .images-wrapper {
+  }
+
+  .image img {
+    width: 100%;
+  }
+
+  p.caption {
+  }
+}
+
+.article-edit-section {
+  margin-bottom: 2rem;
+
+  .form-wrapper {
+    border: 1px solid #999;
+    padding: 2rem;
+    margin-bottom: 2rem;
   }
 }

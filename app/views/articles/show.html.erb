@@ -1,8 +1,26 @@
 <article class="post-body">
-  <h1><%= @article.title %></h1>
-  <p>Author: <%= @article.user.user_name %></p>
-  <%= link_to "Edit", edit_article_path %>
-  <%= link_to "Delete", article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  <header class="article-header">
+    <h1><%= @article.title %></h1>
+    <p>Author: <%= @article.user.user_name %></p>
+    <%= link_to "Edit", edit_article_path %>
+    <%= link_to "Delete", article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  </header>
+  <section class="article-summary">
+    <p><%= @article.body %></p>
+  </section>
 
-  <p><%= @article.body %></p>
+  <section class="article-content">
+    <% @article.frames.each do |frame| %>
+      <div class="frame">
+        <div class="images-wrapper">
+          <% frame.images.each do |image| %>
+            <div class="image">
+              <%= image_tag image %>
+            </div>
+          <% end %>
+        </div>
+        <p class="caption"><%= frame.caption %></p>
+      </div>
+    <% end %>
+  </section>
 </article>
