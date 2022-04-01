@@ -1,23 +1,23 @@
-<div class="text-field">
+<div class="form-field text-field">
   <%= form.label :user_name %>
+  <% user.errors.full_messages_for(:user_name).each do |message| %>
+    <p class="form-field-error-message"><%= message %></p>
+  <% end %>
   <%= form.text_field :user_name %>
-  <% if user.errors[:user_name].any? %>
-    <p><%= user.errors.where(:user_name).first.full_message %></p>
-  <% end %>
 </div>
 
-<div class="text-field">
+<div class="form-field text-field">
   <%= form.label :email %>
-  <%= form.text_field :email, type: 'email' %>
-  <% if user.errors[:email].any? %>
-    <p><%= user.errors.where(:email).first.full_message %></p>
+  <% user.errors.full_messages_for(:email).each do |message| %>
+    <p class="form-field-error-message"><%= message %></p>
   <% end %>
+  <%= form.text_field :email, type: 'email' %>
 </div>
 
-<div class="password-field">
+<div class="form-field password-field">
   <%= form.label :password %>
-  <%= form.password_field :password %>
-  <% if user.errors[:password].any? %>
-    <p><%= user.errors.where(:password).first.full_message %></p>
+  <% user.errors.full_messages_for(:password).each do |message| %>
+    <p class="form-field-error-message"><%= message %></p>
   <% end %>
+  <%= form.password_field :password %>
 </div>

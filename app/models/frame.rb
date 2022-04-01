@@ -5,4 +5,5 @@ class Frame < ApplicationRecord
   VALID_TYPES = ['image']
 
   validates :display_type, inclusion: { in: VALID_TYPES }
+  validates :images, presence: true
 end

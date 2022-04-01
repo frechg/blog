@@ -6,10 +6,10 @@
   </div>
 </section>
 
-<% if @article_frames.any? %>
+<% if @article.frames.any? %>
   <section class="article-edit-section current-frames">
     <h2>Edit current frames</h2>
-    <% @article_frames.each do |frame| %>
+    <% @article.frames.each do |frame| %>
       <div class="form-wrapper">
         <%= render "frames/form", frame: frame %>
         <%= link_to "Delete", [frame.article, frame], data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
@@ -21,6 +21,6 @@
 <section class="article-edit-section new-frame">
   <h2>Add a new frame</h2>
     <div class="form-wrapper">
-      <%= render "frames/form", frame: @new_frame %>
+      <%= render "frames/form", frame: @article.frames.build %>
     </div>
 </section>
