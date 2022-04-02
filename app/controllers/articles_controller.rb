@@ -9,24 +9,14 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
-    @frame = Frame.new
+    @article.frames.new
   end
 
   def create
-    @article = Article.new(article_params)
-    @article.user = current_user
-    @frame = Frame.new(frame_params)
-    puts "Frame has images? #{@frame.images.first}"
+    @article = current_user.articles.new(article_params)
 
     if @article.save
-      @frame.article = @article
-
-      if @frame.save
         redirect_to @article
-      else
-        @article.destroy
-        render :new, status: :unprocessable_entity
-      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -56,10 +46,8 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :status)
-  end
-
-  def frame_params
-    params.require(:frame).permit(:display_type, :caption, images: [])
+    params.require(:article)
+      .permit(:title, :body, :status,
+              frames_attributes: [:id, :display_type, :caption, :_destroy, images: []])
   end
 end

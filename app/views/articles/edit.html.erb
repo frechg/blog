@@ -1,26 +1,5 @@
 <h1>Edit Article</h1>
 
 <section class="article-edit-section">
-  <div class="form-wrapper">
-    <%= render "form", article: @article  %>
-  </div>
-</section>
-
-<% if @article.frames.any? %>
-  <section class="article-edit-section current-frames">
-    <h2>Edit current frames</h2>
-    <% @article.frames.each do |frame| %>
-      <div class="form-wrapper">
-        <%= render "frames/form", frame: frame %>
-        <%= link_to "Delete", [frame.article, frame], data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-      </div>
-    <% end %>
-  </section>
-<% end %>
-
-<section class="article-edit-section new-frame">
-  <h2>Add a new frame</h2>
-    <div class="form-wrapper">
-      <%= render "frames/form", frame: @article.frames.build %>
-    </div>
+  <%= render "form", article: @article  %>
 </section>

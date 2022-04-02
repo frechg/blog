@@ -1,4 +1,4 @@
-<%= form_with(model: @article, html: { enctype: "multipart/form-data" } ) do |form| %>
+<%= form_with( model: @article, multipart: true ) do |form| %>
   <div>
     <%= form.label :title %>
     <%= form.text_field :title %>
@@ -18,18 +18,8 @@
     <% end %>
   </div>
 
-  <section class="article-edit-section new-frame">
-    <h2>Add a frame</h2>
-      <div class="form-wrapper">
-        <%= fields_for @frame do |frame_form| %>
-          <%= frame_form.label :display_type %>
-          <%= frame_form.select :display_type, ['image'], selected: 'image' %>
-          <%= frame_form.label :images %>
-          <%= frame_form.file_field :images, multiple: true %>
-          <%= frame_form.label :caption %>
-          <%= frame_form.text_area :caption %>
-        <% end %>
-      </div>
+  <section class="article-edit-section current-frames">
+    <%= render partial: "frames/form", locals: { form: form, article: @article }  %>
   </section>
 
   <div>

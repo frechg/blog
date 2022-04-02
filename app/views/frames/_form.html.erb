@@ -1,17 +1,17 @@
-<%= form_with(model: [@article, frame]) do |form| %>
-  <div>
-    <%= form.label :display_type %>
-    <%= form.select :display_type, ['image'], selected: 'image' %>
-  </div>
-  <div>
-    <%= form.label :images %>
-    <%= form.file_field :images, multiple: true %>
-  </div>
-  <div>
-    <%= form.label :caption %>
-    <%= form.text_area :caption %>
-  </div>
-  <div>
-    <%= form.submit %>
-  </div>
+<%= form.fields_for :frames do |frames_form| %>
+  <% if !frames_form.object.new_record? %>
+    <%= image_tag frames_form.object.images.first, style: "width: 100%;" %>
+    <%= frames_form.label :_destroy, "Delete frame" %>
+    <%= frames_form.check_box :_destroy %>
+  <% else %>
+    <%= frames_form.label :display_type %>
+    <%= frames_form.select :display_type, ['image'], selected: 'image' %>
+    <%= frames_form.label :images %>
+    <%= frames_form.file_field :images, multiple: true %>
+    <% article.errors.full_messages_for(:"frames.images").each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  <% end %>
+  <%= frames_form.label :caption %>
+  <%= frames_form.text_area :caption %>
 <% end %>
