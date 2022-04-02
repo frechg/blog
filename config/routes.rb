@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   root "articles#index"
 
   resources :articles do
-    resources :frames, only: [:create, :update, :destroy]
+    resources :frames, only: [:new, :create]
   end
 end

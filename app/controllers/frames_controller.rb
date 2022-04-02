@@ -1,24 +1,19 @@
 class FramesController < ApplicationController
 
+  def new
+    @article = Article.find(params[:article_id])
+    @frame = @article.frames.new
+  end
+
   def create
     @article = Article.find(params[:article_id])
     @frame = @article.frames.create(frame_params)
-    redirect_to edit_article_path(@article)
-  end
 
-  def update
-    @article = Article.find(params[:article_id])
-    @frame = Frame.find(params[:id])
-    @frame.update(frame_params)
-    redirect_to edit_article_path(@article)
-  end
-
-  def destroy
-    @article = Article.find(params[:article_id])
-    @frame = Frame.find(params[:id])
-    @frame.destroy
-
-    redirect_to edit_article_path(@article)
+    if @frame.save
+      redirect_to @article
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
