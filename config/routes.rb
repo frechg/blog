@@ -15,5 +15,7 @@ Rails.application.routes.draw do
 
   resources :articles do
     resources :frames, only: [:new, :create]
+    resources :invites, only: [:new, :create, :show]
   end
+
 end

@@ -1,0 +1,6 @@
+<h1>Invite people to collaborate</h1>
+<p>Anyone with this link can add to and edit the story.</p>
+
+<label>Invite to <%= @invite.article.title %></label>
+<input type="text" disabled="true" value="<%= sign_up_url(invite_token: @invite.token) %>"/>
+<p><i>Link does not expire.</i></p>

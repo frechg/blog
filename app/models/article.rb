@@ -3,6 +3,7 @@ class Article < ApplicationRecord
 
   has_and_belongs_to_many :users
   has_many :frames, dependent: :destroy
+  has_many :invites, dependent: :destroy
 
   accepts_nested_attributes_for :frames, allow_destroy: true
 
