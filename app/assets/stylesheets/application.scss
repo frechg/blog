@@ -103,11 +103,30 @@ article.post-body {
 .frame {
   margin: 0 0 2rem 0;
 
-  .images-wrapper {
+  .media-wrapper {
+    display: flex;
+    gap: 0.5rem;
+
+    &.image  {
+    }
+
+    &.gallery {
+
+    }
   }
 
-  .image img {
-    width: 100%;
+  .image-item {
+    flex-grow: 1;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      vertical-align: bottom;
+    }
+  }
+
+  .gallery-item {
   }
 
   p.caption {
@@ -139,3 +158,4 @@ p.form-field-error-message {
     border-color: red;
   }
 }
+
