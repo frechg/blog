@@ -1,9 +1,11 @@
 <article class="post-body">
   <header class="article-header">
     <h1><%= @article.title %></h1>
-    <p>Author: <%= @article.user.user_name %></p>
+    <p><%= @article.list_authors %></p>
     <%= link_to "Edit", edit_article_path %>
-    <%= link_to "Delete", article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <%= link_to "Delete",
+      article_path(@article),
+      data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
   </header>
   <section class="article-summary">
     <p><%= @article.body %></p>
