@@ -1,4 +1,5 @@
 class UsersController < Clearance::UsersController
+  include InviteHelper
 
   def new
     @user = user_from_params
@@ -8,12 +9,13 @@ class UsersController < Clearance::UsersController
 
   def create
     @user = user_from_params
-    @invite = Invite.find_by(token: params[:invite_token]) unless !params[:invite_token]
 
     if @user.save
       sign_in @user
 
-      if @invite && @invite.accept(@user)
+      if valid_invite?
+        @invite = valid_invite?
+        @invite.accept(@user)
         redirect_to @invite.article
       else
         redirect_back_or url_after_create
