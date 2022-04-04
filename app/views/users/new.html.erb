@@ -2,6 +2,9 @@
   <h2><%= t(".title") %></h2>
 
   <%= form_for @user, html: { data: {turbo: false} }  do |form| %>
+    <% if @invite_token != nil %>
+      <%= hidden_field_tag :invite_token, @invite_token %>
+    <% end %>
     <%= render partial: '/users/form', locals: { form: form, user: @user } %>
 
     <div class="submit-field">

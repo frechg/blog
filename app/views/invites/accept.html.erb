@@ -1,0 +1,9 @@
+<h1>Create account to accept invite</h1>
+<p><%= @invite.user.user_name %> has invited to you collaborate on <%= @invite.article.title %>.</p>
+
+<p>
+  <%= link_to "Sign Up", sign_up_path(invite_token: @invite.token) %>
+  or
+  <%= link_to "Logn In", sign_in_path(invite_token: @invite.token) %>
+  to accept the invite and start collaborating.
+</p>

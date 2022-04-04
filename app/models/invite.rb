@@ -7,4 +7,8 @@ class Invite < ApplicationRecord
   def generate_token
     self.token = Digest::SHA1.hexdigest([self.article_id, Time.now, rand].join)
   end
+
+  def accept(user)
+    user.articles << self.article
+  end
 end

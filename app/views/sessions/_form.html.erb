@@ -1,4 +1,7 @@
 <%= form_for :session, url: session_path do |form| %>
+  <% if @invite_token != nil %>
+    <%= hidden_field_tag :invite_token, @invite_token %>
+  <% end %>
   <div class="text-field">
     <%= form.label :email %>
     <%= form.text_field :email, type: 'email' %>

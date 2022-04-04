@@ -1,11 +1,23 @@
 class UsersController < Clearance::UsersController
 
+  def new
+    @user = user_from_params
+    @invite_token = params[:invite_token]
+    render template: "users/new"
+  end
+
   def create
     @user = user_from_params
+    @invite = Invite.find_by(token: params[:invite_token]) unless !params[:invite_token]
 
     if @user.save
       sign_in @user
-      redirect_back_or url_after_create
+
+      if @invite && @invite.accept(@user)
+        redirect_to @invite.article
+      else
+        redirect_back_or url_after_create
+      end
     else
       render template: "users/new"
     end

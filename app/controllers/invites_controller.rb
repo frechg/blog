@@ -1,4 +1,6 @@
 class InvitesController < ApplicationController
+  skip_before_action :require_login, only: [:accept]
+
   def new
     @article = Article.find(params[:article_id])
   end
@@ -19,5 +21,23 @@ class InvitesController < ApplicationController
   def show
     @article = Article.find(params[:article_id])
     @invite = Invite.find(params[:id])
+  end
+
+  def accept
+    @invite = Invite.find_by(token: params[:invite_token])
+
+    if @invite
+      @article = @invite.article
+
+      if current_user
+        current_user.articles << @article
+        redirect_to @article
+      else
+        render :accept
+      end
+    else
+      render :invalid
+    end
+
   end
 end
