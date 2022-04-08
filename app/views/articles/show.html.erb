@@ -3,11 +3,15 @@
     <h1><%= @article.title %></h1>
     <p><%= @article.list_authors %></p>
     <% if current_user %>
+      <%= link_to "Add images", new_article_frame_path(@article) %>
+      |
+      <%= link_to "Invite collaborators", new_article_invite_path(@article) %>
+      |
       <%= link_to "Edit", edit_article_path %>
+      |
       <%= link_to "Delete",
         article_path(@article),
         data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-      <%= link_to "Invite collaborators", new_article_invite_path(@article) %>
     <% else %>
       <p>
         <%= link_to "Sign Up", sign_up_path %>
@@ -37,5 +41,5 @@
 
 <section>
   </hr>
-  <%= link_to "Add a frame", new_article_frame_path(@article) %>
+  <%= link_to "Add images", new_article_frame_path(@article) %>
 </section>

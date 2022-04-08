@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   root "articles#index"
 
   resources :articles do
-    resources :frames, only: [:new, :create]
+    resources :frames, only: [:new, :create, :bulk_new, :bulk_create]
     resources :invites, only: [:new, :create, :show]
   end
 
