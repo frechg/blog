@@ -22,15 +22,15 @@ class FramesController < ApplicationController
 
   def bulk_create
     @article = Article.find(params[:article_id])
-    @images = params[:media][:images].shift
     @frames_attributes = []
 
-    # Build attributes for frame creation
-    @images.each do |i|
+    # Build attributes for frames from posted images
+    image_params.each do |i|
       @frames_attributes << [display_type: "image", images: i]
     end
 
-    if @atticle.update(@frames_attributes)
+    # Create frames on parent article from attributes
+    if @article.frames.create(@frames_attributes)
       redirect_to @article
     else
       flash.now.alert = "Images not added."
@@ -41,7 +41,7 @@ class FramesController < ApplicationController
   private
 
   def image_params
-    params.require(:media).permit(images: [])
+    params[:media][:images]
   end
 
   def frame_params

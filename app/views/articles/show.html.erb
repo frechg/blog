@@ -5,6 +5,8 @@
     <% if current_user %>
       <%= link_to "Add images", new_article_frame_path(@article) %>
       |
+      <%= link_to "Bulk add", article_bulk_new_frame_path(@article) %>
+      |
       <%= link_to "Invite collaborators", new_article_invite_path(@article) %>
       |
       <%= link_to "Edit", edit_article_path %>
