@@ -26,6 +26,8 @@ class FramesController < ApplicationController
 
     # Build attributes for frames from posted images
     image_params.each do |i|
+      taken_date = Exiftool.new(i.to_path).to_hash[:date_time_original]
+      puts "Originally taken on: " + taken_date.to_s
       @frames_attributes << [display_type: "image", images: i]
     end
 
@@ -41,7 +43,13 @@ class FramesController < ApplicationController
   private
 
   def image_params
-    params[:media][:images]
+    images = params[:media][:images]
+
+    if images.first == ""
+      images.shift
+    end
+
+    return images
   end
 
   def frame_params
