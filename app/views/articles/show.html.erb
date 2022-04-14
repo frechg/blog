@@ -28,9 +28,9 @@
   <section class="article-content">
     <% @article.frames.each do |frame| %>
       <div class="frame">
-        <div class="media-wrapper <%= frame.display_type %>">
+        <div class="media-wrapper image">
           <% frame.images.each do |image| %>
-            <div class="<%= frame.display_type %>-item">
+            <div class="image-item">
               <%= image_tag image %>
             </div>
           <% end %>

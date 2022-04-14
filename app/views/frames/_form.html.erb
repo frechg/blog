@@ -4,8 +4,6 @@
     <%= frames_form.label :_destroy, "Delete frame" %>
     <%= frames_form.check_box :_destroy %>
   <% else %>
-    <%= frames_form.label :display_type %>
-    <%= frames_form.select :display_type, ['image'], selected: 'image' %>
     <%= frames_form.label :images %>
     <%= frames_form.file_field :images, multiple: true %>
     <% article.errors.full_messages_for(:"frames.images").each do |message| %>

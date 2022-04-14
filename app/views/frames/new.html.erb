@@ -1,7 +1,5 @@
 <h1>Add a frame</h1>
 <%= form_with model: [:article, @frame] do |form| %>
-  <%= form.label :display_type %>
-  <%= form.select :display_type, ['image'], selected: 'image' %>
   <%= form.label :images %>
   <%= form.file_field :images, multiple: true %>
   <% @frame.errors.full_messages_for(:images).each do |message| %>
