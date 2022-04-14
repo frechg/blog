@@ -28,7 +28,7 @@ class FramesController < ApplicationController
     image_params.each do |i|
       taken_date = Exiftool.new(i.to_path).to_hash[:date_time_original]
       puts "Originally taken on: " + taken_date.to_s
-      @frames_attributes << [display_type: "image", images: i]
+      @frames_attributes << [images: i]
     end
 
     # Create frames on parent article from attributes
@@ -53,6 +53,6 @@ class FramesController < ApplicationController
   end
 
   def frame_params
-    params.require(:frame).permit(:display_type, :caption, images:[])
+    params.require(:frame).permit(:caption, images:[])
   end
 end

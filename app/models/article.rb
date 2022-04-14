@@ -27,11 +27,4 @@ class Article < ApplicationRecord
 
     return list
   end
-
-  def sort_frames
-    # Sorts story frames by image create date
-
-    # Iterate through each frame in the story
-    # Get created_at_date using mini_magick or exiftool
-  end
 end

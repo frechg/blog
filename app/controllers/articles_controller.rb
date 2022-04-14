@@ -49,6 +49,6 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article)
       .permit(:title, :body, :status,
-              frames_attributes: [:id, :display_type, :caption, :_destroy, images: []])
+              frames_attributes: [:id, :caption, :_destroy, images: []])
   end
 end
