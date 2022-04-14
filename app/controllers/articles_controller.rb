@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @frames = @article.frames.order(captured_at: :asc)
   end
 
   def new

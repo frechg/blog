@@ -26,9 +26,7 @@ class FramesController < ApplicationController
 
     # Build attributes for frames from posted images
     image_params.each do |i|
-      taken_date = Exiftool.new(i.to_path).to_hash[:date_time_original]
-      puts "Originally taken on: " + taken_date.to_s
-      @frames_attributes << [images: i]
+      @frames_attributes << [captured_at: capture_date(i), images: i]
     end
 
     # Create frames on parent article from attributes
@@ -41,6 +39,25 @@ class FramesController < ApplicationController
   end
 
   private
+
+  def capture_date(image)
+    metadata = Exiftool.new(image.path).to_hash
+
+    if metadata.include?(:sub_sec_date_time_original)
+      date = metadata[:sub_sec_date_time_original].to_s
+      capture_date = Time.parse(date)
+    elsif metadata.include?(:create_date)
+      date = metadata[:create_date].to_s
+      capture_date = Time.strptime(date, "%Y:%m:%d %H:%M:%S")
+    elsif metadata.include?(:file_modify_date)
+      date = metadate[:file_modify_date].to_s
+      capture_date = Time.parse(date)
+    else
+      capture_date = Time.now
+    end
+
+    return capture_date
+  end
 
   def image_params
     images = params[:media][:images]
