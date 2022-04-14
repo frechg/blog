@@ -7,6 +7,8 @@ class FramesController < ApplicationController
   def create
     @article = Article.find(params[:article_id])
     @frame = @article.frames.create(frame_params)
+    image_for_date  = params[:frame][:images][1]
+    @frame.captured_at = capture_date(image_for_date)
 
     if @frame.save
       redirect_to @article
@@ -50,7 +52,7 @@ class FramesController < ApplicationController
       date = metadata[:create_date].to_s
       capture_date = Time.strptime(date, "%Y:%m:%d %H:%M:%S")
     elsif metadata.include?(:file_modify_date)
-      date = metadate[:file_modify_date].to_s
+      date = metadata[:file_modify_date].to_s
       capture_date = Time.parse(date)
     else
       capture_date = Time.now
