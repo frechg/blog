@@ -3,7 +3,7 @@
 
 <%= form_with( url: article_bulk_frames_path(@article), scope: :media, method: :post,  multipart: true ) do |form| %>
   <%= form.label :images %>
-  <%= form.file_field :images, multiple: true %>
+  <%= form.file_field :images, multiple: true, accept: 'image/jpeg,image/png,image/heic,image/heif' %>
   <div>
     <%= form.submit "Upload" %>
   </div>

@@ -3,4 +3,34 @@ class Frame < ApplicationRecord
   has_many_attached :images, dependent: :destroy
 
   validates :images, presence: true
+  validate :image_type
+  validate :image_size
+
+  IMAGE_VALIDATIONS = {
+    content_type: ['image/jpeg', 'image/png', 'image/heic', 'image/heif'],
+    max_size: 1.megabytes
+  }
+
+  private
+
+  def image_type
+    images.each do |i|
+      if !IMAGE_VALIDATIONS[:content_type].include?(i.content_type)
+        errors.add(:images, 'Images must be jpeg, png, heic or heif format.')
+        return
+      end
+    end
+  end
+
+  def image_size
+    images.each do |i|
+      if IMAGE_VALIDATIONS[:max_size] < i.byte_size
+        errors.add(
+          :images,
+          "Images must be less than #{IMAGE_VALIDATIONS[:max_size].to_formatted_s(:human_size)}"
+        )
+        return
+      end
+    end
+  end
 end

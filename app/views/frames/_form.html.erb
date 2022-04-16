@@ -5,7 +5,7 @@
     <%= frames_form.check_box :_destroy %>
   <% else %>
     <%= frames_form.label :images %>
-    <%= frames_form.file_field :images, multiple: true %>
+    <%= frames_form.file_field :images, multiple: true, accept: 'image/jpeg,image/png,image/heic,image/heif' %>
     <% article.errors.full_messages_for(:"frames.images").each do |message| %>
       <div><%= message %></div>
     <% end %>
