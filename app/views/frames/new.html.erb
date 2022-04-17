@@ -3,7 +3,7 @@
   <%= form.label :images %>
   <%= form.file_field :images, multiple: true, accept: 'image/jpeg,image/png,image/heic,image/heif' %>
   <% @frame.errors.full_messages_for(:images).each do |message| %>
-    <div><%= message %></div>
+    <div class="form-field-error-message"><%= message %></div>
   <% end %>
   <%= form.label :caption %>
   <%= form.text_area :caption %>

@@ -7,8 +7,11 @@ class FramesController < ApplicationController
   def create
     @article = Article.find(params[:article_id])
     @frame = @article.frames.create(frame_params)
-    image_for_date  = params[:frame][:images][1]
-    @frame.captured_at = capture_date(image_for_date)
+
+    unless params[:frame][:images][1].nil?
+      image_for_date  = params[:frame][:images][1]
+      @frame.captured_at = capture_date(image_for_date)
+    end
 
     if @frame.save
       redirect_to @article
@@ -24,12 +27,7 @@ class FramesController < ApplicationController
 
   def bulk_create
     @article = Article.find(params[:article_id])
-    @frames_attributes = []
-
-    # Build attributes for frames from posted images
-    image_params.each do |i|
-      @frames_attributes << [captured_at: capture_date(i), images: i]
-    end
+    @frames_attributes = frames_attributes_building
 
     # Create frames on parent article from attributes
     if @article.frames.create(@frames_attributes)
@@ -41,6 +39,20 @@ class FramesController < ApplicationController
   end
 
   private
+
+  def frames_attributes_building
+    attributes = []
+    images = image_params
+
+    unless images.empty?
+      puts "Images params empty? " + images.empty?.to_s
+      images.each do |i|
+        attributes << [captured_at: capture_date(i), images: i]
+      end
+    end
+
+    return attributes
+  end
 
   def capture_date(image)
     metadata = Exiftool.new(image.path).to_hash

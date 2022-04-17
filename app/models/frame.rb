@@ -10,7 +10,7 @@ class Frame < ApplicationRecord
 
   IMAGE_VALIDATIONS = {
     content_type: ['image/jpeg', 'image/png', 'image/heic', 'image/heif'],
-    max_size: 1.megabytes
+    max_size: 10.megabytes
   }
 
   private
@@ -18,7 +18,7 @@ class Frame < ApplicationRecord
   def image_type
     images.each do |i|
       if !IMAGE_VALIDATIONS[:content_type].include?(i.content_type)
-        errors.add(:images, 'Images must be jpeg, png, heic or heif format.')
+        errors.add(:images, 'must be jpeg, png, heic or heif format.')
         return
       end
     end
@@ -29,7 +29,7 @@ class Frame < ApplicationRecord
       if IMAGE_VALIDATIONS[:max_size] < i.byte_size
         errors.add(
           :images,
-          "Images must be less than #{IMAGE_VALIDATIONS[:max_size].to_formatted_s(:human_size)}"
+          "must be less than #{IMAGE_VALIDATIONS[:max_size].to_formatted_s(:human_size)}"
         )
         return
       end
