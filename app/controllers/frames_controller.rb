@@ -8,9 +8,23 @@ class FramesController < ApplicationController
     @article = Article.find(params[:article_id])
     @frame = @article.frames.create(frame_params)
 
-    unless params[:frame][:images][1].nil?
-      image_for_date  = params[:frame][:images][1]
-      @frame.captured_at = capture_date(image_for_date)
+    images = params[:frame][:images]
+
+    if images.first == ""
+      images.shift
+    end
+
+    unless images.empty?
+      oldest_date = Time.new
+
+      images.each do |i|
+        date = capture_date(i)
+        if oldest_date > date
+          oldest_date = date
+        end
+      end
+
+      @frame.captured_at = oldest_date
     end
 
     if @frame.save
@@ -44,11 +58,20 @@ class FramesController < ApplicationController
       attributes = []
 
       images.each do |i|
+        scale_down(i)
         attributes << [captured_at: capture_date(i), images: i]
       end
 
       return attributes
     end
+  end
+
+  def scale_down(i)
+    path = i.path
+
+    ImageProcessing::MiniMagick.source(path)
+      .resize_to_limit(1200,nil)
+      .call(destination: path)
   end
 
   def capture_date(image)

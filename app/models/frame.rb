@@ -1,7 +1,8 @@
 class Frame < ApplicationRecord
   belongs_to :article
+
   has_many_attached :images, dependent: :destroy do |attachable|
-    attachable.variant :medium, resize_to_limit: [1200, nil]
+    attachable.variant :small, resize_to_limit: [400, nil]
   end
 
   validates :images, presence: true
