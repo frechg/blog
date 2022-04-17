@@ -27,31 +27,28 @@ class FramesController < ApplicationController
 
   def bulk_create
     @article = Article.find(params[:article_id])
-    @frames_attributes = frames_attributes_building
+    @article.frames.create!(frames_attributes)
+    redirect_to @article
 
-    # Create frames on parent article from attributes
-    if @article.frames.create(@frames_attributes)
-      redirect_to @article
-    else
-      flash.now.alert = "Images not added."
-      render :bulk_new, status: :unprocessable_entity
-    end
+  rescue ActiveRecord::RecordInvalid => invalid
+    flash.now.alert = invalid.record.errors.full_messages.join(" ")
+    render :bulk_new, status: :unprocessable_entity
   end
 
   private
 
-  def frames_attributes_building
-    attributes = []
+  def frames_attributes
     images = image_params
 
     unless images.empty?
-      puts "Images params empty? " + images.empty?.to_s
+      attributes = []
+
       images.each do |i|
         attributes << [captured_at: capture_date(i), images: i]
       end
-    end
 
-    return attributes
+      return attributes
+    end
   end
 
   def capture_date(image)
