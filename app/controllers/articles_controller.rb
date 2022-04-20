@@ -1,4 +1,8 @@
 class ArticlesController < ApplicationController
+  before_action only: [:edit, :update, :destroy] do
+    require_ownership(params[:id])
+  end
+
   def index
     @articles = current_user.articles.order(created_at: :desc).first(5)
   end

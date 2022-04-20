@@ -1,4 +1,8 @@
 class FramesController < ApplicationController
+  before_action  only: [:new, :create, :bulk_new, :bulk_create] do
+    require_ownership(params[:article_id])
+  end
+
   def new
     @article = Article.find(params[:article_id])
     @frame = @article.frames.new

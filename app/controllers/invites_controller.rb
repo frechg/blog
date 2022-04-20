@@ -1,6 +1,10 @@
 class InvitesController < ApplicationController
   skip_before_action :require_login, only: [:accept]
 
+  before_action only: [:new, :create] do
+    require_ownership(params[:article_id])
+  end
+
   def new
     @article = Article.find(params[:article_id])
   end
