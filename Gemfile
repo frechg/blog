@@ -49,7 +49,6 @@ gem "dartsass-rails"
 gem "image_processing", "~> 1.2"
 gem "mini_magick"
 gem "exiftool_vendored"
-gem "ruby-vips"
 
 gem "clearance"
 
