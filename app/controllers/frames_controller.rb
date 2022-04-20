@@ -10,26 +10,22 @@ class FramesController < ApplicationController
 
   def create
     @article = Article.find(params[:article_id])
-    @frame = @article.frames.create(frame_params)
 
-    images = params[:frame][:images]
+    oldest_date = Time.new
 
-    if images.first == ""
-      images.shift
-    end
+    frame_params[:images].each do |i|
+      unless i == ""
+        scale_image(i.path)
+        current_image_date = capture_date(i.path)
 
-    unless images.empty?
-      oldest_date = Time.new
-
-      images.each do |i|
-        date = capture_date(i)
-        if oldest_date > date
-          oldest_date = date
+        if oldest_date > current_image_date
+          oldest_date = current_image_date
         end
       end
-
-      @frame.captured_at = oldest_date
     end
+
+    @frame = @article.frames.create(frame_params)
+    @frame.captured_at = oldest_date
 
     if @frame.save
       redirect_to @article
@@ -62,24 +58,23 @@ class FramesController < ApplicationController
       attributes = []
 
       images.each do |i|
-        scale_down(i)
-        attributes << [captured_at: capture_date(i), images: i]
+        scale_image(i.path)
+        attributes << [captured_at: capture_date(i.path), images: i]
       end
 
       return attributes
     end
   end
 
-  def scale_down(i)
-    path = i.path
-
-    ImageProcessing::MiniMagick.source(path)
-      .resize_to_limit(1200,nil)
-      .call(destination: path)
+  def scale_image(img_path)
+    ImageProcessing::MiniMagick
+      .source(img_path)
+      .resize_to_limit(1200, nil)
+      .call(destination: img_path)
   end
 
-  def capture_date(image)
-    metadata = Exiftool.new(image.path).to_hash
+  def capture_date(img_path)
+    metadata = Exiftool.new(img_path).to_hash
 
     if metadata.include?(:sub_sec_date_time_original)
       date = metadata[:sub_sec_date_time_original].to_s
