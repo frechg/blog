@@ -10,26 +10,39 @@ class FramesController < ApplicationController
 
   def create
     @article = Article.find(params[:article_id])
-
-    oldest_date = Time.new
+    frame_date = Time.new
+    image_blobs = []
 
     frame_params[:images].each do |i|
       unless i == ""
-        scale_image(i.path)
-        current_image_date = capture_date(i.path)
+        # Create and modifiy a new image from the UploadedFile
+        processed = process_image(i.path)
 
-        if oldest_date > current_image_date
-          oldest_date = current_image_date
-        end
+        # Create a new blob from the image
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: processed.tempfile.open,
+          filename: i.original_filename.sub(/\.[^.]+\z/, ".#{processed.type}")
+        )
+
+        # Add the new blob to array for assignment
+        image_blobs << blob
+
+        # Find oldest date to set as frame date
+        i_date = capture_date(i.path)
+        frame_date = i_date if frame_date > i_date
       end
     end
 
-    @frame = @article.frames.create(frame_params)
-    @frame.captured_at = oldest_date
+    @frame = @article.frames.create(
+      caption: frame_params[:caption],
+      captured_at: frame_date,
+      images: image_blobs
+    )
 
     if @frame.save
       redirect_to @article
     else
+      image_blobs.each { |blob| blob.destroy }
       flash.now.alert = "Images not added."
       render :new, status: :unprocessable_entity
     end
@@ -52,25 +65,34 @@ class FramesController < ApplicationController
   private
 
   def frames_attributes
-    images = image_params
+    image_uploads = image_params
 
-    unless images.empty?
+    unless image_uploads.empty?
       attributes = []
 
-      images.each do |i|
-        scale_image(i.path)
-        attributes << [captured_at: capture_date(i.path), images: i]
+      image_uploads.each do |i|
+        # Create and modify a new image from the uploaded file
+        processed = process_image(i.path)
+
+        # Create a new blob from the image
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: processed.tempfile.open,
+          filename: i.original_filename.sub(/\.[^.]+\z/, ".#{processed.type}")
+        )
+
+        attributes << [captured_at: capture_date(i.path), images: blob]
       end
 
       return attributes
     end
   end
 
-  def scale_image(img_path)
-    ImageProcessing::MiniMagick
-      .source(img_path)
-      .resize_to_limit(1200, nil)
-      .call(destination: img_path)
+  def process_image(img_path)
+    processed = MiniMagick::Image.open(img_path)
+    processed.resize("1200x")
+    processed.format("jpeg")
+
+    return processed
   end
 
   def capture_date(img_path)
