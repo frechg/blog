@@ -11,13 +11,13 @@
     <%= form.select :status, ['public','private','archived'], selected: 'public' %>
   </div>
   <div>
-    <%= form.label :body %>
-    <%= form.text_area :body %>
-    <% @article.errors.full_messages_for(:body).each do |message| %>
+    <%= form.label :summary %>
+    <%= form.text_area :summary %>
+    <% @article.errors.full_messages_for(:summary).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
   <div>
-    <%= form.submit %>
+    <%= form.submit "Create Story" %>
   </div>
 <% end %>
