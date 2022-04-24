@@ -25,6 +25,10 @@ class UsersController < Clearance::UsersController
     end
   end
 
+  def show
+    @user = current_user
+  end
+
   private
 
   def user_from_params

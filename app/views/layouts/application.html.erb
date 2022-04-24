@@ -23,8 +23,7 @@
         </div>
         <div class="nav-right">
           <% if signed_in? %>
-            <p class="user-name"><%= current_user.user_name %></p>
-            <%= button_to "Logout", sign_out_path, method: :delete  %>
+            <%= link_to "#{current_user.user_name}", user_path(current_user.id) %>
           <% else %>
             <%= link_to "Sign In", sign_in_path %>
           <% end %>

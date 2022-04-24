@@ -1,0 +1,4 @@
+<header class="content-header">
+  <h1><%= current_user.user_name %></h1>
+  <%= button_to "Logout", sign_out_path, method: :delete  %>
+</header>
