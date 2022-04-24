@@ -10,6 +10,8 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     @frames = @article.frames.order(captured_at: :asc)
+
+    render layout: "article"
   end
 
   def new
@@ -30,6 +32,8 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+
+    render layout: "article"
   end
 
   def update

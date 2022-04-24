@@ -1,5 +1,32 @@
-<h1>Edit Story</h1>
+<header id="header">
+  <nav>
+    <div class="nav-left">
+      <%= link_to "Back", article_path(@article) %>
+    </div>
+    <div class="nav-right">
+    </div>
+  </nav>
+</header>
 
-<section class="article-edit-section">
-  <%= render "form", article: @article  %>
+<section class="primary-content">
+  <div id="flash">
+    <% flash.each do |key, value| %>
+      <div class="flash-message <%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+
+  <header>
+    <h1>Edit Story</h1>
+  </header>
+
+  <section class="article-edit-section">
+    <%= render "form", article: @article  %>
+
+    <div class="edit-actions">
+      <%= link_to "Delete the story",
+        article_path(@article),
+        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    </div>
+  </section>
 </section>
+

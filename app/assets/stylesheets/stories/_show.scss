@@ -1,16 +1,73 @@
-.article-header {
-  margin-bottom: 4rem;
+article.story-content {
+  div.heading-wrapper {
+    padding: 0 1rem;
+  }
+}
+
+.story-header {
+  margin-bottom: 2rem;
 
   h1 {
     font-weight: 300;
   }
+
+  p.sub-heading {
+    color: $secondary-text-color;
+  }
 }
 
-.article-summary {
-  margin-bottom: 4rem;
+section.story-summary {
+  margin-bottom: 2rem;
 }
 
-.article-content {
+section.add-content-actions {
+  background: $gray-200;
+  border-top: 1px solid $base-border-color;
+  border-bottom: 1px solid $base-border-color;
+  display: flex;
+  margin-bottom: 2rem;
+  padding: 1rem 0.75rem;
+  gap: 0.5rem;
+
+  p {
+    color: $secondary-text-color;
+    font-weight: 400;
+    margin: 0 0 1rem;
+  }
+
+  a {
+    flex-grow: 1;
+    display: block;
+    font-family: $font-stack-sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: $base-line-height;
+    color: $white;
+    text-align: center;
+    text-decoration: none;
+    white-space: null;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: $base-button-color;
+    border: none;
+    border-radius: $base-border-radius;
+    padding: 0.5rem 0.75rem;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:active {
+      background-color: tint-color($base-button-color, 10%);
+
+      &:focus {
+      }
+    }
+  }
+}
+
+section.story-body {
   margin-bottom: 4rem;
 }
 

@@ -1,3 +1,23 @@
-<h1>Invite people to collaborate</h1>
+<header id="header">
+  <nav>
+    <div class="nav-left">
+      <%= link_to "Back", article_path(@article) %>
+    </div>
+    <div class="nav-right">
+    </div>
+  </nav>
+</header>
 
-<%= button_to "Generate invite link", article_invites_path(@article), method: :post  %>
+<section class="primary-content">
+  <div id="flash">
+    <% flash.each do |key, value| %>
+      <div class="flash-message <%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+
+  <h1>Invite people to collaborate</h1>
+  <p>Invite new members of the story so they can add thier images.</p>
+
+  <%= button_to "Generate invite link", article_invites_path(@article), method: :post  %>
+
+</section>

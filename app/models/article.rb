@@ -12,7 +12,7 @@ class Article < ApplicationRecord
 
   def list_authors
     author_count = self.users.count
-    list = "Author".pluralize(author_count) + ": "
+    list = ""
 
     self.users.each_with_index do |u, i|
        if i == 0

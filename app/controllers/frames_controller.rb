@@ -6,6 +6,8 @@ class FramesController < ApplicationController
   def new
     @article = Article.find(params[:article_id])
     @frame = @article.frames.new
+
+    render layout: "article"
   end
 
   def create
@@ -50,6 +52,8 @@ class FramesController < ApplicationController
 
   def bulk_new
     @article = Article.find(params[:article_id])
+
+    render layout: "article"
   end
 
   def bulk_create

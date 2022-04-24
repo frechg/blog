@@ -1,10 +1,27 @@
-<h1>Add images</h1>
-<p> Add one or more images to <%= @article.title %>.</p>
+<header id="header">
+  <nav>
+    <div class="nav-left">
+      <%= link_to "Back", article_path(@article) %>
+    </div>
+    <div class="nav-right">
+    </div>
+  </nav>
+</header>
 
-<%= form_with( url: article_bulk_frames_path(@article), scope: :media, method: :post,  multipart: true ) do |form| %>
-  <%= form.label :images %>
-  <%= form.file_field :images, multiple: true, accept: 'image/jpeg,image/png,image/heic,image/heif' %>
-  <div>
-    <%= form.submit "Upload" %>
+<section class="primary-content">
+  <div id="flash">
+    <% flash.each do |key, value| %>
+      <div class="flash-message <%= key %>"><%= value %></div>
+    <% end %>
   </div>
-<% end %>
+
+  <h1>Add multiple images</h1>
+
+  <%= form_with( url: article_bulk_frames_path(@article), scope: :media, method: :post,  multipart: true ) do |form| %>
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true, accept: 'image/jpeg,image/png,image/heic,image/heif' %>
+    <div>
+      <%= form.submit "Upload" %>
+    </div>
+  <% end %>
+</section>

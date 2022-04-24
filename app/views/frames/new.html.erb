@@ -1,14 +1,37 @@
-<h1>Add a frame</h1>
-<%= form_with model: [:article, @frame] do |form| %>
-  <%= form.label :images %>
-  <%= form.file_field :images, multiple: true, accept: 'image/jpeg,image/png,image/heic,image/heif' %>
-  <% @frame.errors.full_messages_for(:images).each do |message| %>
-    <div class="form-field-error-message"><%= message %></div>
-  <% end %>
-  <%= form.label :caption %>
-  <%= form.text_area :caption %>
+<header id="header">
+  <nav>
+    <div class="nav-left">
+      <%= link_to "Back", article_path(@article) %>
+    </div>
+    <div class="nav-right">
+    </div>
+  </nav>
+</header>
 
-  <div>
-    <%= form.submit %>
+<section class="primary-content">
+  <div id="flash">
+    <% flash.each do |key, value| %>
+      <div class="flash-message <%= key %>"><%= value %></div>
+    <% end %>
   </div>
-<% end %>
+
+  <h1>Add an image with a caption</h1>
+
+  <%= form_with model: [:article, @frame] do |form| %>
+    <div>
+      <%= form.label :images %>
+      <%= form.file_field :images, multiple: true, accept: 'image/jpeg,image/png,image/heic,image/heif' %>
+      <% @frame.errors.full_messages_for(:images).each do |message| %>
+        <div class="form-field-error-message"><%= message %></div>
+      <% end %>
+    </div>
+    <div>
+      <%= form.label :caption %>
+      <%= form.text_area :caption %>
+    </div>
+
+    <div>
+      <%= form.submit "Upload" %>
+    </div>
+  <% end %>
+</section>

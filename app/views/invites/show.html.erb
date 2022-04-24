@@ -1,7 +1,26 @@
-<h1>Invite people to collaborate</h1>
-<p>Anyone with this link can add to and edit the story.</p>
+<header id="header">
+  <nav>
+    <div class="nav-left">
+      <%= link_to "Back", article_path(@article) %>
+    </div>
+    <div class="nav-right">
+    </div>
+  </nav>
+</header>
 
-<label>Invite to <%= @invite.article.title %></label>
-<input type="text" disabled="true"
-  value="<%= accept_invite_url(invite_token: @invite.token) %>"/>
-<p><i>Link does not expire.</i></p>
+<section class="primary-content">
+  <div id="flash">
+    <% flash.each do |key, value| %>
+      <div class="flash-message <%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+
+  <h1>Invite people to collaborate</h1>
+  <p>Anyone with this link can add to and edit the story.</p>
+
+  <label>Invite to <%= @invite.article.title %></label>
+  <input type="text" disabled="true"
+    value="<%= accept_invite_url(invite_token: @invite.token) %>"/>
+  <p><i>Link does not expire.</i></p>
+
+</section>

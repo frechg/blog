@@ -7,6 +7,8 @@ class InvitesController < ApplicationController
 
   def new
     @article = Article.find(params[:article_id])
+
+    render layout: "article"
   end
 
   def create
@@ -25,6 +27,8 @@ class InvitesController < ApplicationController
   def show
     @article = Article.find(params[:article_id])
     @invite = Invite.find(params[:id])
+
+    render layout: "article"
   end
 
   def accept

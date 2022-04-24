@@ -1,37 +1,57 @@
-<article class="post-body">
-  <header class="article-header">
-    <h1><%= @article.title %></h1>
-    <p><%= @article.list_authors %></p>
-    <% if current_user %>
-      <%= link_to "Add one frame", new_article_frame_path(@article) %>
-      |
-      <%= link_to "Add many frames", article_bulk_new_frame_path(@article) %>
-      |
-      <%= link_to "Invite collaborators", new_article_invite_path(@article) %>
-      |
-      <%= link_to "Edit", edit_article_path %>
-      |
-      <%= link_to "Delete",
-        article_path(@article),
-        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-    <% end %>
-  </header>
-  <section class="article-summary">
-    <p><%= @article.summary %></p>
-  </section>
+<header id="header">
+  <nav>
+    <div class="nav-left">
+      <%= link_to "Stories", root_path %>
+    </div>
+    <div class="nav-right">
+      <% if current_user.is_author?(@article) %>
+        <%= link_to "Edit", edit_article_path %>
+        <%= link_to "Invite", new_article_invite_path(@article), class: "invite" %>
+      <% end %>
+    </div>
+  </nav>
+</header>
 
-  <section class="article-content">
-    <% @frames.each do |frame| %>
-      <div class="frame">
-        <div class="media-wrapper image">
-          <% frame.images.each do |image| %>
-            <div class="image-item">
-              <%= image_tag image %>
-            </div>
-          <% end %>
-        </div>
-        <p class="caption"><%= frame.caption %></p>
-      </div>
+<div class="story-container">
+  <div id="flash">
+    <% flash.each do |key, value| %>
+      <div class="flash-message <%= key %>"><%= value %></div>
     <% end %>
-  </section>
-</article>
+  </div>
+
+  <article class="story-content">
+    <div class="heading-wrapper">
+
+      <header class="story-header">
+        <h1><%= @article.title %></h1>
+        <p class="sub-heading">By: <%= @article.list_authors %></p>
+      </header>
+
+      <section class="story-summary">
+        <p><%= @article.summary %></p>
+      </section>
+    </div>
+
+    <% if current_user.is_author?(@article) %>
+      <section class="add-content-actions">
+        <%= link_to "Add image with caption", new_article_frame_path(@article) %>
+        <%= link_to "Add multiple images", article_bulk_new_frame_path(@article) %>
+      </section>
+    <% end %>
+
+    <section class="story-body">
+      <% @frames.each do |frame| %>
+        <div class="frame">
+          <div class="media-wrapper image">
+            <% frame.images.each do |image| %>
+              <div class="image-item">
+                <%= image_tag image %>
+              </div>
+            <% end %>
+          </div>
+          <p class="caption"><%= frame.caption %></p>
+        </div>
+      <% end %>
+    </section>
+  </article>
+</div>
