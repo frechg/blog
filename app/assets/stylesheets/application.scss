@@ -25,13 +25,14 @@ header#header {
     justify-content: space-between;
 
     a {
-      color: $primary-text-color;
+      color: $secondary-text-color;
       margin: 0px 10px;
       padding: 30px 0px;
       text-decoration: none;
+      font-weight: 600;
 
       &:hover {
-        text-decoration: underline;
+        color: $hover-link-color;
       }
     }
 

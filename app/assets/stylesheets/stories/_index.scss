@@ -4,7 +4,7 @@ section.article-list {
     margin-bottom: 2rem;
 
     > a {
-      border: 2px solid $gray-500;
+      border: 2px solid $base-border-color;
       border-radius: 8px;
       display: block;
       padding: 30px;
@@ -26,12 +26,12 @@ section.article-list {
     }
 
     h3 {
-      margin: 0 0 0.5rem;
+      margin: 0;
       font-weight: 400;
     }
 
     p {
-      margin: 0;
+      margin: 0.5rem 0 0;
       font-weight: 300;
     }
   }

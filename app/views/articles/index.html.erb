@@ -8,7 +8,9 @@
         <article class="preview">
           <a href="<%= article_path(article) %>">
             <h3><%= article.title %></h3>
-            <p><%= article.body.truncate(60, seperator: ' ') %></p>
+            <% unless article.body.empty? %>
+              <p><%= article.body.truncate(60, seperator: ' ') %></p>
+            <% end %>
           </a>
         </article>
       <% end %>

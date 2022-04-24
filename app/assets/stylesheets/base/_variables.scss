@@ -66,8 +66,12 @@ $primary-text-color: $black;
 $secondary-text-color: $gray-600;
 
 // Links
-$base-link-color: $blue;
-$hover-link-color: shade-color($base-link-color, 20%);
+$base-link-color: $secondary-text-color;
+$hover-link-color: rgb(37, 39, 61);
+
+// Buttons
+$base-button-color: rgb(37, 39, 61);
+$hover-button-color: rgb(37, 39, 61);
 
 // Borders
 $base-border-color: $gray-300;

@@ -13,13 +13,12 @@ button {
   vertical-align: middle;
   cursor: pointer;
   user-select: none;
-  background-color: $blue;
+  background-color: $base-button-color;
   border: none;
   border-radius: $base-border-radius;
   padding: 0.75rem 1.5rem;
 
   &:hover {
-    background-color: tint-color($blue, 20%);
     text-decoration: none;
   }
 

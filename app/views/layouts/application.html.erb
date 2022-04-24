@@ -14,8 +14,12 @@
     <header id="header">
       <nav>
         <div class="nav-left">
-          <%= link_to "My Stories", root_path %>
-          <%= link_to "New Story", new_article_path %>
+          <% if signed_in? %>
+            <%= link_to "My Stories", root_path %>
+            <%= link_to "New Story", new_article_path %>
+          <% else %>
+            <%= link_to "Story Weave", root_path %>
+          <% end %>
         </div>
         <div class="nav-right">
           <% if signed_in? %>
