@@ -1,0 +1,44 @@
+.article-header {
+  margin-bottom: 4rem;
+}
+
+.article-summary {
+  margin-bottom: 4rem;
+}
+
+.article-content {
+  margin-bottom: 4rem;
+}
+
+.frame {
+  margin: 0 0 2rem 0;
+
+  .media-wrapper {
+    display: flex;
+    gap: 0.5rem;
+
+    &.image  {
+    }
+
+    &.gallery {
+
+    }
+  }
+
+  .image-item {
+    flex-grow: 1;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      vertical-align: bottom;
+    }
+  }
+
+  .gallery-item {
+  }
+
+  p.caption {
+  }
+}

@@ -4,19 +4,35 @@
 @import 'base/buttons';
 @import 'base/forms';
 @import 'base/base';
+@import 'forms';
+@import 'flash_messages';
+@import 'stories/index';
+@import 'stories/show';
+@import 'stories/edit';
+
+body {
+  font-family: $font-stack-sans-serif;
+  color: $primary-text-color;
+}
 
 header#header {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid $base-border-color;
 
   nav {
     display: flex;
-    margin: 0px 20px;
+    margin: 0px 1rem;
     align-items: center;
     justify-content: space-between;
 
     a {
+      color: $primary-text-color;
       margin: 0px 10px;
       padding: 30px 0px;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     .nav-left {
@@ -37,29 +53,14 @@ header#header {
 section.primary-content {
   max-width: 600px;
   margin: 60px auto;
+  padding: 0 1rem;
 }
 
 header.content-header {
   margin-bottom: 30px;
-}
 
-section.article-list {
-
-  article.preview {
-    margin-bottom: 30px;
-
-    > a {
-      border: 1px solid #e1e1e1;
-      display: block;
-      padding: 30px;
-    }
-
-    h3 {
-      margin: 0;
-    }
-
-    p {
-    }
+  h1 {
+    font-weight: 300;
   }
 }
 
@@ -67,99 +68,3 @@ section.container {
   border: 1px solid #e1e1e1;
   padding: 30px;
 }
-
-.flash-message {
-  border-radius: 6px;
-  padding: 12px;
-  margin-bottom: 24px;
-
-  &.notice {
-    border: 1px solid yellow;
-    color: brown;
-  }
-
-  &.alert {
-    border: 1px solid red;
-    color: red;
-  }
-}
-
-
-article.post-body {
-}
-
-.article-header {
-  margin-bottom: 4rem;
-}
-
-.article-summary {
-  margin-bottom: 4rem;
-}
-
-.article-content {
-  margin-bottom: 4rem;
-}
-
-.frame {
-  margin: 0 0 2rem 0;
-
-  .media-wrapper {
-    display: flex;
-    gap: 0.5rem;
-
-    &.image  {
-    }
-
-    &.gallery {
-
-    }
-  }
-
-  .image-item {
-    flex-grow: 1;
-
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      vertical-align: bottom;
-    }
-  }
-
-  .gallery-item {
-  }
-
-  p.caption {
-  }
-}
-
-.article-edit-section {
-  margin-bottom: 2rem;
-
-  .form-wrapper {
-    border: 1px solid #999;
-    padding: 2rem;
-    margin-bottom: 2rem;
-  }
-}
-
-.form-field {
-  margin-bottom: 1rem;
-}
-
-.form-field-error-message {
-  color: red;
-}
-
-p.form-field-error-message {
-  display: inline-block;
-  color: red;
-  margin: 0 0.375rem 0.375rem 0;
-}
-
-.field_with_errors {
-  > input {
-    border-color: red;
-  }
-}
-

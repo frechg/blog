@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blog</title>
+    <title>Story Weave</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,8 +14,8 @@
     <header id="header">
       <nav>
         <div class="nav-left">
-          <%= link_to "Articles", root_path %>
-          <%= link_to "New Post", new_article_path %>
+          <%= link_to "My Stories", root_path %>
+          <%= link_to "New Story", new_article_path %>
         </div>
         <div class="nav-right">
           <% if signed_in? %>
@@ -23,7 +23,6 @@
             <%= button_to "Logout", sign_out_path, method: :delete  %>
           <% else %>
             <%= link_to "Sign In", sign_in_path %>
-            <%= link_to "Sign Up", sign_up_path %>
           <% end %>
         </div>
       </nav>
