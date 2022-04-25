@@ -1,12 +1,18 @@
 <header id="header">
   <nav>
     <div class="nav-left">
-      <%= link_to "Stories", root_path %>
+      <% if signed_in? %>
+        <%= link_to "Stories", root_path %>
+      <% else %>
+        <%= link_to "Story Weave", root_path %>
+      <% end %>
     </div>
     <div class="nav-right">
-      <% if current_user.is_author?(@article) %>
+      <% if signed_in? && current_user.is_author?(@article) %>
         <%= link_to "Edit", edit_article_path %>
         <%= link_to "Invite", new_article_invite_path(@article), class: "invite" %>
+      <% else %>
+        <%= link_to "Sign In", sign_in_path %>
       <% end %>
     </div>
   </nav>
@@ -32,7 +38,7 @@
       </section>
     </div>
 
-    <% if current_user.is_author?(@article) %>
+    <% if current_user && current_user.is_author?(@article) %>
       <section class="add-content-actions">
         <%= link_to "Add image with caption", new_article_frame_path(@article) %>
         <%= link_to "Add multiple images", article_bulk_new_frame_path(@article) %>
@@ -49,7 +55,12 @@
               </div>
             <% end %>
           </div>
-          <p class="caption"><%= frame.caption %></p>
+          <div class="narrative">
+            <span class="author"><%= frame.user.user_name %></span>
+            <% if !frame.caption.empty? %>
+              <p class="caption"><%= frame.caption %></p>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </section>

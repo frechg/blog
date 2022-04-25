@@ -78,13 +78,6 @@ section.story-body {
   .media-wrapper {
     display: flex;
     gap: 0.5rem;
-
-    &.image  {
-    }
-
-    &.gallery {
-
-    }
   }
 
   .image-item {
@@ -98,10 +91,14 @@ section.story-body {
     }
   }
 
-  .gallery-item {
+  p.caption {
+    color: $secondary-text-color;
+    font-weight: 300;
+    padding: 0 1rem;
   }
 
-  p.caption {
-    padding: 0 1rem;
+  span.author {
+    font-weight: 500;
+    display: inline-block;
   }
 }

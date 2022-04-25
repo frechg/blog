@@ -3,6 +3,8 @@ class ArticlesController < ApplicationController
     require_ownership(params[:id])
   end
 
+  skip_before_action :require_login, only: [:show]
+
   def index
     @articles = current_user.articles.order(created_at: :desc).first(5)
   end
