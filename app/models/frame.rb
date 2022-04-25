@@ -1,5 +1,6 @@
 class Frame < ApplicationRecord
   belongs_to :article
+  belongs_to :user
 
   has_many_attached :images, dependent: :destroy do |attachable|
     attachable.variant :small, resize_to_limit: [400, nil]
