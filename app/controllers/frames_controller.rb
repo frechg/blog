@@ -105,9 +105,7 @@ class FramesController < ApplicationController
   end
 
   def capture_date(img)
-    date = Time.strptime(img.exif["DateTimeOriginal"], "%Y:%m:%d %H:%M:%S")
-
-    return date
+    Time.strptime(img.exif["DateTimeOriginal"], "%Y:%m:%d %H:%M:%S")
   end
 
   def image_params
