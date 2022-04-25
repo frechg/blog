@@ -6,6 +6,7 @@ class Frame < ApplicationRecord
     attachable.variant :small, resize_to_limit: [400, nil]
   end
 
+  validates :user, presence: true
   validates :images, presence: true
   validate :image_type
   validate :image_size

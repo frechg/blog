@@ -30,12 +30,13 @@ class FramesController < ApplicationController
         image_blobs << blob
 
         # Find oldest date to set as frame date
-        i_date = capture_date(i.path)
-        frame_date = i_date if frame_date > i_date
+        image_date = capture_date(processed)
+        frame_date = image_date if frame_date > image_date
       end
     end
 
     @frame = @article.frames.create(
+      user_id: current_user.id,
       caption: frame_params[:caption],
       captured_at: frame_date,
       images: image_blobs
@@ -84,7 +85,11 @@ class FramesController < ApplicationController
           filename: i.original_filename.sub(/\.[^.]+\z/, ".#{processed.type}")
         )
 
-        attributes << [captured_at: capture_date(i.path), images: blob]
+        attributes << [
+          user_id: current_user.id,
+          captured_at: capture_date(processed),
+          images: blob
+        ]
       end
 
       return attributes
@@ -99,23 +104,10 @@ class FramesController < ApplicationController
     return processed
   end
 
-  def capture_date(img_path)
-    metadata = Exiftool.new(img_path).to_hash
+  def capture_date(img)
+    date = Time.strptime(img.exif["DateTimeOriginal"], "%Y:%m:%d %H:%M:%S")
 
-    if metadata.include?(:sub_sec_date_time_original)
-      date = metadata[:sub_sec_date_time_original].to_s
-      capture_date = Time.parse(date)
-    elsif metadata.include?(:create_date)
-      date = metadata[:create_date].to_s
-      capture_date = Time.strptime(date, "%Y:%m:%d %H:%M:%S")
-    elsif metadata.include?(:file_modify_date)
-      date = metadata[:file_modify_date].to_s
-      capture_date = Time.parse(date)
-    else
-      capture_date = Time.now
-    end
-
-    return capture_date
+    return date
   end
 
   def image_params
