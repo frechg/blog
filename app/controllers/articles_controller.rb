@@ -12,6 +12,7 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     @frames = @article.frames.order(captured_at: :asc)
+    @one_author = @article.users.count == 1
 
     render layout: "article"
   end

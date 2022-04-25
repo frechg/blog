@@ -54,13 +54,17 @@
                 <%= image_tag image %>
               </div>
             <% end %>
-          </div>
-          <div class="narrative">
-            <span class="author"><%= frame.user.user_name %></span>
-            <% if !frame.caption.empty? %>
-              <p class="caption"><%= frame.caption %></p>
+            <% unless @one_author %>
+              <span class="author"><%= frame.user.user_name %></span>
             <% end %>
           </div>
+
+          <% unless frame.caption == nil || frame.caption.empty? %>
+            <p class="caption">
+              <%= frame.caption %>
+            </p>
+          <% end %>
+
         </div>
       <% end %>
     </section>
