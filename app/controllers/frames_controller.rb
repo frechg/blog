@@ -6,7 +6,6 @@ class FramesController < ApplicationController
   def new
     @article = Article.find(params[:article_id])
     @frame = @article.frames.new
-
     render layout: "article"
   end
 
@@ -53,7 +52,6 @@ class FramesController < ApplicationController
 
   def bulk_new
     @article = Article.find(params[:article_id])
-
     render layout: "article"
   end
 
@@ -85,6 +83,7 @@ class FramesController < ApplicationController
           filename: i.original_filename.sub(/\.[^.]+\z/, ".#{processed.type}")
         )
 
+        # Build attributes array for frame creation
         attributes << [
           user_id: current_user.id,
           captured_at: capture_date(processed),
@@ -107,11 +106,11 @@ class FramesController < ApplicationController
   def capture_date(img)
     date = img.exif["DateTimeOriginal"]
 
-    if date != nil
+    unless date.nil?
       return Time.strptime(date, "%Y:%m:%d %H:%M:%S")
-    else
-      return
     end
+
+    return
   end
 
   def image_params
